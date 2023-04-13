@@ -31,7 +31,18 @@
         <a href="{% url 'extratest:input_number' %}">
           Страница ввода числа</a>
         <p>История догадок каждого экстрасенса.<br>
+          {% if num_extrasens_1.count > 0 %}
+          {% for num in num_extrasens_1 %}
+            {{ num_extrasens_1 }}
+          {% endfor %}
+        {% endif %}<br>
         История введённых пользователем чисел.<br>
+        {{ NumUser.number }}
+        {% if list_num_user.count > 0 %}
+          {% for num_user in list_num_user %}
+            {{ num_user.number }}
+          {% endfor %}
+        {% endif %}<br>
         {% if data %}
           {{ data }}
         {% endif %}<br>

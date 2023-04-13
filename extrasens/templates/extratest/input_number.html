@@ -22,23 +22,21 @@
       <br>
     </header>
     <main>
-      <form action="/examples/" method="POST">
+      <form method="post" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="Submit" name="Отправить" value="Отправить"/>
+        <p>
+          <label>Введите загаданное число</label><br>
+          <input type="number" name="num_user" />
+        </p>
+          <input type="submit" value="Отправить" >
       </form>
-      {% comment %}
-      <form method="post" action="/examples/">
-        {% csrf_token %} 
-        <label>Введите загаданное число:</label>
-        <input type="text" name="num_user">
-        <br>
-        <input type="submit" value="Отправить">
-      </form>
-      {% endcomment %}
       <div>
         <p>История догадок каждого экстрасенса.<br>
         История введённых пользователем чисел.<br>
+      {{ num_user }}
+      {% for num in data %}
+      <p>{{ num }}</p>
+      {% endfor %}
         {% if data %}
           {{ data }}
         {% endif %}<br>

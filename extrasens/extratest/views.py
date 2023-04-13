@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Extrasens_1
+from django.shortcuts import render, redirect
+from .models import Extrasens_1, NumUser
 
 from random import randint
 from .forms import UserForm
@@ -11,27 +11,41 @@ def index(request):
 
 def examples(request):
     template = 'extratest/examples.html'
-    extrasens1 = Extrasens_1.objects.all()
+    num_extrasens_1 = Extrasens_1.objects.all()
+    list_num_user = NumUser.objects.all()
     num_random1 = randint(10, 99)
     num_random2 = randint(10, 99)
     title = 'Тестирование экстрасенсов'
     context = {
         'num_random1': num_random1,
         'num_random2': num_random2,
-        'extrasens1': extrasens1,
+        'num_extrasens_1': num_extrasens_1,
         'title': title,
+        'list_num_user': list_num_user,
     }
     return render(request, template, context) 
 
 def input_number(request):
     template = 'extratest/input_number.html'
-    # num_user = request.POST.get("num_user")
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        data = form.cleaned_data.get("num_user")
+    if request.method == 'POST':
+        num_user = NumUser()
+        num_user.number = request.POST.get("number")
+        num_user.save()
         context = {
-            'form': form,
-            'data': data,
-    }
+            'num_user': num_user,
+        }
         return render(request, template, context)
-    return render(request, template) 
+        
+    else:
+        num_user = NumUser()
+        #num_user = request.GET.get('num_user')
+        #list_num_user = UserForm.filter(num_user=num_user)
+        #list_num_user.save()
+        #context = {
+        #    'num_user': num_user,
+            #'list_num_user': list_num_user,
+        #}
+        return render(request, template, {'num_user': num_user,})
+        
+    #return render(request, template, context)
+    #return render(request, template, {'form': form,})
