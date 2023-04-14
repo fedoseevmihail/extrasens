@@ -3,22 +3,47 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from random import randint
+from django.utils.crypto import get_random_string
 
 
-class Extrasens_1(models.Model):
+class Extrasens(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE,
                                 primary_key=True)
-    @staticmethod
-    def randint_1():
-        return str(randint(10, 99))
-
+    
     @receiver(post_save, sender=User)
-    def create_latest_inputs(sender, instance, created, **kwargs):
+    def create_latest_inputs_1(sender, instance, created, **kwargs):
         if created:
-            Extrasens_1.objects.create(user=instance)
+            Extrasens.objects.create(user=instance)
+
+    def __str__(self):
+        return self.user
+    
+class Extrasens_1(models.Model):
+    number = models.CharField(max_length=2, null=True)
+    reliability = models.CharField(max_length=2, null=True)
+        
+    @staticmethod
+    def randint():
+        return randint(10, 99)
+    
+    def __str__(self):
+        return self.number
+    
+class Extrasens_2(models.Model):
+    number = models.CharField(max_length=2, null=True)
+        
+    @staticmethod
+    def randint():
+        return randint(10, 99)
+    
+    def __str__(self):
+        return self.number
 
 
 class NumUser(models.Model):
-    number = models.IntegerField(verbose_name='Введите загаданное число', null=True)
+    number = models.CharField(max_length=2, verbose_name='Введите загаданное число', null=True)
+
+    def __str__(self):
+        return self.number
 

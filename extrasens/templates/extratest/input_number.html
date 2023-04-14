@@ -1,50 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Краткое описание страницы">
-    <title>Тестирование экстрасенсов</title>
-    <link rel="icon" href="fav.ico" type="image">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-  </head>
-  <body>
-    <header>
-      <h1>Тестирование экстрасенсов</h1>
-      <nav>
-        <a href="{% url 'extratest:index' %}">
-          Главная</a>
-      </nav>
-      <br>
-    </header>
-    <main>
-      <form method="post" action="">
-        {% csrf_token %}
-        <p>
-          <label>Введите загаданное число</label><br>
-          <input type="number" name="num_user" />
-        </p>
-          <input type="submit" value="Отправить" >
-      </form>
-      <div>
-        <p>История догадок каждого экстрасенса.<br>
-        История введённых пользователем чисел.<br>
-      {{ num_user }}
-      {% for num in data %}
-      <p>{{ num }}</p>
-      {% endfor %}
-        {% if data %}
-          {{ data }}
-        {% endif %}<br>
-        Текущее значение достоверности по каждому экстрасенсу.<br></p>
-      </div>
-    </main>
-    <footer>
-      По заказу компании "Эдисон"
-    </footer>
-  </body>
-</html> 
+{% extends 'extratest/base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+  <form method="post" action="">
+    {% csrf_token %}
+    <label>Введите загаданное число</label><br>
+    <input type="text" name="num_user"/>
+    <input type="submit" value="Отправить"/>
+  </form>
+  <br>
+  <div>
+    <p>Вы можете ввести ещё одно число или перейти к 
+      <a href="{% url 'extratest:results' %}">
+        Результатам тестирования</a></p>
+  </div>
+{% endblock %}

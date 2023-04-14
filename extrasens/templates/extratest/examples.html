@@ -1,56 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Краткое описание страницы">
-    <title>Тестирование экстрасенсов</title>
-    <link rel="icon" href="fav.ico" type="image">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-  </head>
-  <body>
-    <header>
-      <h1>{{ title }}</h1>
-      <nav>
-        <a href="{% url 'extratest:index' %}">
-          Главная</a>
-      </nav>
-      <br>
-    </header>
-    <main>
-      Вариант экстрасенса №1<br>
-      {{ request.user.extrasens1.randint_1 }}
-      {{ num_random1 }}<br><br>
-      Вариант экстрасенса №2<br>
-      {{ num_random2 }}<br><br>
-      <div>
-        <a href="{% url 'extratest:input_number' %}">
-          Страница ввода числа</a>
-        <p>История догадок каждого экстрасенса.<br>
-          {% if num_extrasens_1.count > 0 %}
-          {% for num in num_extrasens_1 %}
-            {{ num_extrasens_1 }}
-          {% endfor %}
-        {% endif %}<br>
-        История введённых пользователем чисел.<br>
-        {{ NumUser.number }}
-        {% if list_num_user.count > 0 %}
-          {% for num_user in list_num_user %}
-            {{ num_user.number }}
-          {% endfor %}
-        {% endif %}<br>
-        {% if data %}
-          {{ data }}
-        {% endif %}<br>
-        Текущее значение достоверности по каждому экстрасенсу.<br></p>
-      </div>
-    </main>
-    <footer>
-      По заказу компании "Эдисон"
-    </footer>
-  </body>
-</html> 
+{% extends 'extratest/base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+  <h3>Ниже представлены варианты экстрасенсов:</h3>
+  <p>Вариант экстрасенса №1<br>
+  {{ num_extrasens_1.number }}<br><br>
+  Вариант экстрасенса №2<br>
+  {{ num_extrasens_2.number }}<br><br></p>
+<div>
+  <p>Если готовы, то переходите на
+    <a href="{% url 'extratest:input_number' %}">
+      Страницу ввода числа</a></p>
+</div>
+{% endblock %}
