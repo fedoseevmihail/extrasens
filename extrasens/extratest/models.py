@@ -19,9 +19,16 @@ class Extrasens(models.Model):
     def __str__(self):
         return self.user
     
+class NumUser(models.Model):
+    number = models.CharField(max_length=2, verbose_name='Введите загаданное число', null=True)
+
+    def __str__(self):
+        return self.number
+    
 class Extrasens_1(models.Model):
     number = models.CharField(max_length=2, null=True)
     reliability = models.CharField(max_length=2, null=True)
+    #reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
         
     @staticmethod
     def randint():
@@ -32,6 +39,7 @@ class Extrasens_1(models.Model):
     
 class Extrasens_2(models.Model):
     number = models.CharField(max_length=2, null=True)
+    reliability = models.CharField(max_length=2, null=True)
         
     @staticmethod
     def randint():
@@ -40,10 +48,4 @@ class Extrasens_2(models.Model):
     def __str__(self):
         return self.number
 
-
-class NumUser(models.Model):
-    number = models.CharField(max_length=2, verbose_name='Введите загаданное число', null=True)
-
-    def __str__(self):
-        return self.number
 

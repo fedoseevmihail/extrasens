@@ -55,12 +55,19 @@ def results(request):
     list_num_extrasens_1 = Extrasens_1.objects.all()
     list_num_extrasens_2 = Extrasens_2.objects.all()
     list_num_user = NumUser.objects.all()
-    rel_extrasens_1 = Extrasens_1.reliability
+    #rel_extrasens_1 = 0
+    #filter_num = []
+    #for num_extrasens_1 in list_num_extrasens_1:
+    #    if num_extrasens_1.number == num_extrasens_1.reliability.number:
+    #        rel_extrasens_1 += 1
+    #    else:
+    #        rel_extrasens_1 -= 0
+        
+   
     context = {
         'list_num_extrasens_1': list_num_extrasens_1,
         'list_num_extrasens_2': list_num_extrasens_2,
         'list_num_user': list_num_user,
         'title': title,
-        'rel_extrasens_1': rel_extrasens_1,
     }
     return render(request, template, context)
