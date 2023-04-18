@@ -26,9 +26,9 @@ class NumUser(models.Model):
         return self.number
     
 class Extrasens_1(models.Model):
+    reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
     number = models.CharField(max_length=2, null=True)
-    reliability = models.CharField(max_length=2, null=True)
-    #reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
+    #reliability = models.CharField(max_length=2, null=True)
         
     @staticmethod
     def randint():
@@ -38,8 +38,9 @@ class Extrasens_1(models.Model):
         return self.number
     
 class Extrasens_2(models.Model):
+    reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
     number = models.CharField(max_length=2, null=True)
-    reliability = models.CharField(max_length=2, null=True)
+    #reliability = models.CharField(max_length=2, null=True)
         
     @staticmethod
     def randint():
