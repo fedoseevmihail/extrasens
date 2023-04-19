@@ -31,10 +31,16 @@
     <div class="col-sm">
       Достоверность первого экстрасенса:<br>
       {{ rel_extrasens_1 }}
-
     </div>
     <div class="col-sm">
       Достоверность второго экстрасенса:<br>
       {{ rel_extrasens_2 }}
     </div>
+  </div>
+  <br>
+  <div>
+    <p>Если хотите попробовать ещё раз, то переходите на
+      <a href="{% url 'extratest:index' %}">
+        Главную страницу</a></p>
+  </div>
 {% endblock %}

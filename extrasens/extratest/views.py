@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Extrasens, NumUser, Extrasens_1, Extrasens_2
-
+from .models import NumUser, Extrasens_1, Extrasens_2
+from django.http import HttpResponse
 
 def index(request):
     template = 'extratest/index.html'
@@ -53,50 +53,26 @@ def results(request):
     list_num_extrasens_1 = Extrasens_1.objects.all()
     list_num_extrasens_2 = Extrasens_2.objects.all()
     list_num_user = NumUser.objects.all()
+    rel_extrasens_1 = 0
     rel_extrasens_2 = 0
-    for num_extrasens_2 in list_num_extrasens_2:
-        for num_user in list_num_user:
-            if num_extrasens_2.number == num_user.number:
-                rel_extrasens_2 += 1
-            else:
-                rel_extrasens_2 += 0
-    #for num_extrasens_1 in list_num_extrasens_1:
-    #    if functools.reduce(lambda i, j: i and j, map(lambda m, k: m == k, num_extrasens_1, list_num_user), True):
-    #        rel_extrasens_1 += 1
-    #    else:
-    #        rel_extrasens_1 += 0
-    
-    #for num_extrasens_1 in list_num_extrasens_1:
-    #    if num_extrasens_1 in list_num_user:
-    #        rel_extrasens_1 += 1
-    #    else:
-    #        rel_extrasens_1 += 0
-    
-    #for num_extrasens_1 in list_num_extrasens_1:
-    #    for num_user in list_num_user:
-    #        if num_extrasens_1.number == num_user.number:
-    #            rel_extrasens_1 += 1
-    #        else:
-    #            rel_extrasens_1 -= 0
-    #for i in range(len(list_num_extrasens_1)):
-    #    if list_num_extrasens_1[i] == list_num_user[i]:
-    #        rel_extrasens_1 += 1
-    #    else:
-    #        rel_extrasens_1 += 0
+    for i in range(len(list_num_extrasens_1)):
+        if list_num_extrasens_1[i].number == list_num_user[i].number:
+            rel_extrasens_1 += 1
+        else:
+            rel_extrasens_1 -= 1
+
+    for i in range(len(list_num_extrasens_2)):
+        if list_num_extrasens_2[i].number == list_num_user[i].number:
+            rel_extrasens_2 += 1
+        else:
+            rel_extrasens_2 -= 1
    
     context = {
         'list_num_extrasens_1': list_num_extrasens_1,
         'list_num_extrasens_2': list_num_extrasens_2,
         'list_num_user': list_num_user,
+        'rel_extrasens_1': rel_extrasens_1,
         'rel_extrasens_2': rel_extrasens_2,
         'title': title,
     }
     return render(request, template, context)
-
-#rel_extrasens_1 = 0
-    #filter_num = []
-    #for num_extrasens_1 in list_num_extrasens_1:
-    #    if num_extrasens_1.number == num_extrasens_1.reliability.number:
-    #        rel_extrasens_1 += 1
-    #    else:
-    #        rel_extrasens_1 -= 0

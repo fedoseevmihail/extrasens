@@ -125,3 +125,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#ANONYMOUS_SESSION_PROCESS_FUNCTION = 'apps.common.middleware.process_anonymous_session'

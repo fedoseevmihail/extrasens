@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from random import randint
-from django.utils.crypto import get_random_string
 
 
 class Extrasens(models.Model):
@@ -26,9 +26,8 @@ class NumUser(models.Model):
         return self.number
     
 class Extrasens_1(models.Model):
-    reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
+    reliability = models.CharField(max_length=2, null=True)
     number = models.CharField(max_length=2, null=True)
-    #reliability = models.CharField(max_length=2, null=True)
         
     @staticmethod
     def randint():
@@ -38,9 +37,8 @@ class Extrasens_1(models.Model):
         return self.number
     
 class Extrasens_2(models.Model):
-    reliability = models.ForeignKey(NumUser, on_delete=models.CASCADE, default=None, null=True)
+    reliability = models.CharField(max_length=2, null=True)
     number = models.CharField(max_length=2, null=True)
-    #reliability = models.CharField(max_length=2, null=True)
         
     @staticmethod
     def randint():
@@ -48,5 +46,3 @@ class Extrasens_2(models.Model):
     
     def __str__(self):
         return self.number
-
-
