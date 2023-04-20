@@ -1,6 +1,18 @@
 from django.shortcuts import render
-from .models import NumUser, Extrasens_1, Extrasens_2
+from .models import NumUser, Extrasens_1, Extrasens_2, UserSession
 from django.http import HttpResponse
+from django.contrib.auth.signals import user_logged_in
+
+
+def user_logged_in_handler(sender, request, user, **kwargs):
+    UserSession.objects.get_or_create(user = user, session_id = request.session.session_key)
+
+user_logged_in.connect(user_logged_in_handler)
+
+def delete_user_sessions(user):
+    user_sessions = UserSession.objects.filter(user = user)
+    for user_session in user_sessions:
+        user_session.session.delete()
 
 def index(request):
     template = 'extratest/index.html'

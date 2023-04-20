@@ -48,7 +48,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'extratest.middleware.MyMiddleware',
 ]
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 ROOT_URLCONF = 'extrasens.urls'
 
@@ -126,3 +129,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #ANONYMOUS_SESSION_PROCESS_FUNCTION = 'apps.common.middleware.process_anonymous_session'
+SESSION_SAVE_EVERY_REQUEST = True
