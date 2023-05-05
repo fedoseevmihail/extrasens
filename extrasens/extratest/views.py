@@ -4,15 +4,15 @@ from django.http import HttpResponse
 from django.contrib.auth.signals import user_logged_in
 
 
-def user_logged_in_handler(sender, request, user, **kwargs):
-    UserSession.objects.get_or_create(user = user, session_id = request.session.session_key)
+#def user_logged_in_handler(sender, request, user, **kwargs):
+#    UserSession.objects.get_or_create(user = user, session_id = request.session.session_key)
 
-user_logged_in.connect(user_logged_in_handler)
+#user_logged_in.connect(user_logged_in_handler)
 
-def delete_user_sessions(user):
-    user_sessions = UserSession.objects.filter(user = user)
-    for user_session in user_sessions:
-        user_session.session.delete()
+#def delete_user_sessions(user):
+#    user_sessions = UserSession.objects.filter(user = user)
+#    for user_session in user_sessions:
+#        user_session.session.delete()
 
 def index(request):
     template = 'extratest/index.html'
@@ -26,6 +26,7 @@ def examples(request):
     template = 'extratest/examples.html'
     title = 'Варианты экстрасенсов'
     num_extrasens_1 = Extrasens_1()
+    request.session['username'] = 'mike'
     num_extrasens_1.number = Extrasens_1.randint()
     num_extrasens_1.save()
     num_extrasens_2 = Extrasens_2()
@@ -41,6 +42,7 @@ def examples(request):
 def input_number(request):
     template = 'extratest/input_number.html'
     title = 'Страница ввода числа'
+    
     if request.method == 'POST':
         num_user = NumUser()
         num_user.number = request.POST.get("num_user")

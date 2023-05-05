@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vatohxpn6-7pc%v6qkh#h$@p3kdlh+(t$hpn8c%6%plxg^@v0t'
+#SECRET_KEY = 'vatohxpn6-7pc%v6qkh#h$@p3kdlh+(t$hpn8c%6%plxg^@v0t'
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+#SESSION_COOKIE_NAME = 'session_name'
+
 MIDDLEWARE = [
+    'extratest.middleware.MyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,10 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'extratest.middleware.MyMiddleware',
 ]
-
-SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 ROOT_URLCONF = 'extrasens.urls'
 
@@ -129,4 +132,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #ANONYMOUS_SESSION_PROCESS_FUNCTION = 'apps.common.middleware.process_anonymous_session'
-SESSION_SAVE_EVERY_REQUEST = True
+#SESSION_SAVE_EVERY_REQUEST = True
+#ANONYMOUS_USER_ID = -1
